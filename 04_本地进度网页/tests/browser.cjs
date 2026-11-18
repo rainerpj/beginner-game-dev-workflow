@@ -5,11 +5,11 @@ const path = require('node:path');
 const {spawn} = require('node:child_process');
 const assert = require('node:assert/strict');
 const {chromium} = require('playwright');
-const root = path.resolve(__dirname, '../..');
+const root = path.resolve(process.env.WORKFLOW_TEST_ROOT || path.resolve(__dirname, '../..'));
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'game-workflow-test-'));
 const copy = path.join(temp, 'project');
 fs.cpSync(root, copy, {recursive:true, filter:source=>!source.split(path.sep).some(x=>['.git','__pycache__','backups','临时测试','交付包'].includes(x))});
-const out = path.join(root,'07_示例与交付验收','浏览器证据');
+const out = process.env.WORKFLOW_TEST_OUTPUT || path.join(root,'07_示例与交付验收','V0.4试用浏览器证据');
 fs.mkdirSync(out,{recursive:true});
 let child, browser;
 (async()=>{
@@ -21,14 +21,28 @@ let child, browser;
   const url='http://127.0.0.1:'+port;
   child=spawn(process.env.WORKFLOW_PYTHON||'python',[path.join(copy,'04_本地进度网页/server.py'),'--port',String(port)],{windowsHide:true,stdio:['ignore','pipe','pipe']});
   let logs=''; child.stdout.on('data',d=>logs+=d);child.stderr.on('data',d=>logs+=d);
-  for(let i=0;i<100;i++){try{if((await fetch(url+'/api/state')).ok)break;}catch{}await new Promise(r=>setTimeout(r,100));if(i===99)throw new Error(logs||'server timeout');}
+  // Drain the probe response; Node's bundled fetch parser can fail on HTTP/1.0 EOF.
+  const probeReady=()=>new Promise(resolve=>{
+    const req=require('node:http').get(url+'/api/state',res=>{
+      res.resume();res.on('end',()=>resolve(res.statusCode===200));res.on('error',()=>resolve(false));
+    });
+    req.on('error',()=>resolve(false));req.setTimeout(1000,()=>{req.destroy();resolve(false);});
+  });
+  for(let i=0;i<100;i++){if(await probeReady())break;await new Promise(r=>setTimeout(r,100));if(i===99)throw new Error(logs||'server timeout');}
   browser=await chromium.launch({headless:true,...(process.env.WORKFLOW_BROWSER_CHANNEL?{channel:process.env.WORKFLOW_BROWSER_CHANNEL}:{})});
   const context=await browser.newContext({viewport:{width:1440,height:1080},permissions:['clipboard-read','clipboard-write']});
   const page=await context.newPage(); const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.goto(url);await page.getByRole('heading',{name:'把完整游戏，一步步做出来。'}).waitFor();
+  await page.getByRole('button',{name:'打开本步操作说明'}).click();
+  await page.locator('#reader').waitFor({state:'visible'});
+  assert.match(await page.locator('#reader-body').textContent(),/当前操作|第一步/);
+  await page.locator('#close-reader').click();
   await page.screenshot({path:path.join(out,'桌面首页.png'),fullPage:true});
   await page.getByRole('button',{name:'继续这一步'}).click();
-  assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/T00/);
+  const taskPrompt=await page.evaluate(()=>navigator.clipboard.readText());
+  assert.match(taskPrompt,/T00/);
+  assert.doesNotMatch(taskPrompt,/类型已确定为 Papers/);
+  assert.match(taskPrompt,/项目概念/);
   await page.locator('nav').getByRole('button',{name:'完整开发路线'}).click();
   assert.equal(await page.locator('.task').count(),20);
   await page.locator('#stage-filter').selectOption('S8');
@@ -38,7 +52,7 @@ let child, browser;
   await page.locator('nav').getByRole('button',{name:'指南与项目记录'}).click();
   await page.getByRole('button',{name:/01_从这里开始/}).click();
   await page.locator('#reader').waitFor({state:'visible'});
-  assert.match(await page.locator('#reader-body').textContent(),/已经决定/);
+  assert.match(await page.locator('#reader-body').textContent(),/动作、解谜/);
   await page.locator('#close-reader').click();
   await page.locator('nav').getByRole('button',{name:/我的反馈/}).click();
   await page.locator('#feedback-text').fill('<img src=x onerror=alert(1)> 我不知道怎样继续');
@@ -56,7 +70,7 @@ let child, browser;
   assert.equal(await page.locator('#feedback-text').inputValue(),'尚未提交的草稿');
   assert.equal(await page.locator('#feedback-kind').inputValue(),'problem');
   const statePath=path.join(copy,'项目记录/state.json');
-  let s=JSON.parse(fs.readFileSync(statePath,'utf8'));s.revision++;s.tasks[0].status='active';s.tasks[0].question='你希望先体验哪一个审核情境？';
+  let s=JSON.parse(fs.readFileSync(statePath,'utf8'));s.revision++;s.tasks[0].status='active';s.tasks[0].question='你希望先体验哪一个玩家场景？';
   fs.writeFileSync(statePath,JSON.stringify(s));
   await page.waitForFunction(revision=>document.querySelector('#connection').textContent.includes('记录版本 '+revision),s.revision);
   assert.equal(await page.locator('#feedback-text').inputValue(),'尚未提交的草稿');

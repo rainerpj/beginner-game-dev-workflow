@@ -37,10 +37,22 @@ def inspect(root):
         checks['improvement_structure'] = True
     except (OSError, ValueError, KeyError, TypeError) as exc:
         checks['improvement_structure'] = str(exc)
-    report['capabilities'] = {key:'待 AI 按实际工具和操作验证' for key in ('Codex协作', '联网参考', '图像生成', '音频生产', 'Unity编辑器运行', '目标设备运行', '浏览器反馈同步')}
+    report['capabilities'] = {key:'待 AI 按实际工具和操作验证' for key in ('Codex协作', '联网参考', '图像生成', '音频生产', '所选引擎或开发环境运行', '目标设备运行', '浏览器反馈同步')}
     game = root / 'Game'
-    report['game_root_structure'] = all((game / name).is_dir() for name in ('Assets', 'Packages', 'ProjectSettings'))
-    report['game_note'] = '这里只检查 Game 根目录结构；其他位置需 AI 核对。结构存在不代表能运行。'
+    markers = []
+    if all((game / name).is_dir() for name in ('Assets', 'Packages', 'ProjectSettings')):
+        markers.append('Unity')
+    if list(game.glob('*.uproject')):
+        markers.append('Unreal')
+    if (game / 'project.godot').is_file():
+        markers.append('Godot')
+    if (game / 'package.json').is_file():
+        markers.append('JavaScript 项目（需核对是否为 Cocos/网页游戏及实际入口）')
+    if (game / 'index.html').is_file():
+        markers.append('HTML 入口（需核对实际用途）')
+    report['game_root_structure'] = bool(markers)
+    report['game_markers'] = markers
+    report['game_note'] = '只检查 Game 根目录标识，不选择引擎或判断已安装。其他位置由 AI 核对；未找到工程不妨碍资料与设计阶段，找到标识也不代表能运行。'
     report['ok'] = all(value is True for value in checks.values())
     return report
 

@@ -7,7 +7,8 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
 errors = []
-docs = [p for p in ROOT.rglob('*.md') if '.git' not in p.parts and 'backups' not in p.parts]
+excluded = {'.git', 'backups', '变更备份', '临时测试', '交付包', '发布记录', '__pycache__'}
+docs = [p for p in ROOT.rglob('*.md') if not excluded.intersection(p.relative_to(ROOT).parts)]
 for p in docs:
     text = p.read_text(encoding='utf-8-sig')
     for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', text):

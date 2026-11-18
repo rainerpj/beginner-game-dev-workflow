@@ -45,6 +45,40 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(all(t['status'] == 'pending' for t in s['tasks']))
         self.assertEqual(s['tasks'][-1]['stage'], 'S9')
 
+    def test_project_metadata_preserves_existing_game_and_evidence(self):
+        self.complete('T00')
+        self.apply(op='feedback', task='T00', kind='idea', text='保留原有审核玩法')
+        before = w.read_json(self.path)
+        after = self.apply(op='project', title='港口审核', direction='既有审核项目', reason='沿用已有决定')
+        self.assertEqual(after['tasks'], before['tasks'])
+        self.assertEqual(after['feedback'], before['feedback'])
+        self.assertEqual(after['title'], '港口审核')
+        self.assertEqual(after['events'][:-1], before['events'])
+        self.assertFalse(after['events'][-1]['completed'])
+        self.assertEqual(w.read_json(self.root / ('backups/state-r' + str(before['revision']) + '.json')), before)
+        with self.assertRaises(w.Invalid):
+            self.apply(op='project', title='迟到更新', reason='旧版本', revision=before['revision'])
+
+    def test_project_metadata_cannot_modify_acceptance_or_take_invalid_values(self):
+        before = w.read_json(self.path)
+        for extra in ({'tasks': []}, {'status': 'done'}, {'title': ''}, {'title': 5},
+                      {'direction': 'x' * 2001}, {'reason': ''}):
+            payload = dict(op='project', title='新名称', reason='展示文字调整')
+            payload.update(extra)
+            with self.assertRaises(w.Invalid):
+                self.apply(**payload)
+            self.assertEqual(w.read_json(self.path), before)
+        with self.assertRaises(w.Invalid):
+            self.apply(op='project', reason='未提供修改字段')
+
+    def test_configuration_update_does_not_reseed_existing_project(self):
+        self.apply(op='update', task='T31', title='已有审核循环', goal='用户已确认的重复判决测试')
+        self.apply(op='project', title='既有项目', direction='审核游戏', reason='旧包兼容验证')
+        before = w.read_json(self.path)
+        w.validate(before, self.root)
+        self.assertEqual(next(t for t in w.view(before, self.root)['tasks'] if t['id'] == 'T31')['goal'], '用户已确认的重复判决测试')
+        self.assertEqual(w.read_json(self.path), before)
+
     def test_complete_entire_lifecycle_with_explicit_evidence(self):
         self.apply(op='add', item=dict(id='T52',stage='S5',title='制作批次',goal='完成约定内容',depends=['T41']))
         for tid in ['T00','T01','T10','T11','T20','T21','T30','T31','T40','T41','T51','T52','T50','T60','T61','T70','T71','T80','T81','T90','T91']:

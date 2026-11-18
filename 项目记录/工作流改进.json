@@ -1,19 +1,324 @@
 {
   "schema": 1,
-  "revision": 0,
-  "signals": [],
-  "sources": {},
-  "items": [],
-  "reviews": [],
-  "last_task_revision": 0,
+  "revision": 14,
+  "signals": [
+    {
+      "key": "V0.4-多类型请求",
+      "locator": "项目记录/工作流改进证据/案例-I1.md:3",
+      "text": "现在这个工作流，我想把它改成一个相对通用一点的，支持更多种类游戏的",
+      "text_kind": "quote",
+      "at": "2026-11-18T14:02:47+00:00",
+      "stream": "V0.4当前请求"
+    },
+    {
+      "key": "V0.4-试用版目标",
+      "locator": "项目记录/工作流改进证据/案例-I2.md:3",
+      "text": "就先按照能给人小范围试用为目标去做一版",
+      "text_kind": "quote",
+      "at": "2026-11-18T14:13:11+00:00",
+      "stream": "V0.4试用请求"
+    }
+  ],
+  "sources": {
+    "V0.4当前请求": {
+      "cursor": "案例-I1-请求",
+      "coverage": "complete",
+      "note": "仅覆盖案例文件所引当前请求；未读取历史对话",
+      "at": "2026-11-18T14:02:47+00:00"
+    },
+    "V0.4试用请求": {
+      "cursor": "案例-I2-目标",
+      "coverage": "complete",
+      "note": "当前目标与本次实际文件检查，未读取旧对话",
+      "at": "2026-11-18T14:13:11+00:00"
+    }
+  },
+  "items": [
+    {
+      "id": "I1",
+      "key": "多类型游戏工作流",
+      "title": "移除固定审核类型，按实际玩法与技术路线适配",
+      "signals": [
+        "V0.4-多类型请求"
+      ],
+      "status": "trial",
+      "previous": "",
+      "classification": "workflow",
+      "cause": "固定类型假设贯穿引导、模板、基线与提示词，程序入口只有 Unity 2D。",
+      "expected": "新项目可按所选玩法推进，保留已确认方向和完整验收；后续真实效果待观察。",
+      "observations": [],
+      "history": [
+        {
+          "op": "assess",
+          "at": "2026-11-18T14:02:48+00:00"
+        },
+        {
+          "op": "prepare",
+          "at": "2026-11-18T14:02:48+00:00"
+        },
+        {
+          "op": "seal",
+          "at": "2026-11-18T14:07:34+00:00"
+        },
+        {
+          "op": "trial",
+          "at": "2026-11-18T14:07:34+00:00"
+        }
+      ],
+      "case_path": "项目记录/工作流改进证据/案例-I1.md",
+      "snapshot": "项目记录/工作流改进证据/变更备份/I1-145a66034e5d49999fc9007ab82f66b7.json",
+      "files": [
+        "02_工作流规范/游戏类型与技术适配.md",
+        ".agents/skills/beginner-game-guide/SKILL.md",
+        ".agents/skills/beginner-game-design/SKILL.md",
+        ".agents/skills/beginner-game-programming/SKILL.md",
+        ".agents/skills/beginner-unity-2d/SKILL.md",
+        ".agents/skills/beginner-game-reference/SKILL.md",
+        ".agents/skills/beginner-game-art/SKILL.md",
+        ".agents/skills/beginner-game-review/SKILL.md",
+        "05_项目模板/项目概念.md",
+        "05_项目模板/游戏设计.md",
+        "05_项目模板/完整版本范围.md",
+        "05_项目模板/内容与资产矩阵.md",
+        "05_项目模板/竞品参考记录.md",
+        "05_项目模板/美术风格与资产清单.md",
+        "05_项目模板/发布与维护清单.md",
+        "05_项目模板/测试与问题记录.md",
+        "02_工作流规范/全流程与阶段验收.md",
+        "02_工作流规范/需求与交付目录.md",
+        "02_工作流规范/新手沟通与提问规范.md",
+        "02_工作流规范/范围估算与制作校准.md",
+        "02_工作流规范/当前操作卡与内容生产.md",
+        "02_工作流规范/持续竞品参考.md",
+        "02_工作流规范/美术音频实际生产.md",
+        "02_工作流规范/首次准备与能力预检.md",
+        "02_工作流规范/自查Review与验证规范.md",
+        "02_工作流规范/任务拆分与需求变更.md",
+        "02_工作流规范/交付维护与求助.md",
+        "01_客户指南/01_从这里开始.md",
+        "01_客户指南/04_怎样运行和测试游戏.md",
+        "01_客户指南/07_第一次打不开怎么办.md",
+        "04_本地进度网页/使用说明.md",
+        "03_Skills/使用说明.md",
+        "04_本地进度网页/web/app.js",
+        "04_本地进度网页/web/index.html",
+        "04_本地进度网页/prompts.json",
+        "02_工作流规范/进度数据与同步约定.md"
+      ],
+      "sealed": "项目记录/工作流改进证据/变更备份/I1-9e45b46f527649cfba978d3e8cc02057.json",
+      "checks": {
+        "correctness": {
+          "result": "pass",
+          "path": "07_示例与交付验收/V0.4通用化验收.md",
+          "note": "66 项状态/HTTP/改进测试、8 个 skills、链接/JSON/JS、隔离初始化及 Edge 浏览器通过；类型假设残留已修正。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:07:34+00:00"
+        },
+        "necessity": {
+          "result": "pass",
+          "path": "07_示例与交付验收/V0.4通用化验收.md",
+          "note": "独立一轮核对新增适配规范、通用程序入口和 project 展示操作的用途；不新建平行进度，不降低门槛。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:07:34+00:00"
+        },
+        "original": {
+          "result": "pass",
+          "path": "07_示例与交付验收/V0.4通用化验收.md",
+          "note": "同一 AI 推演原审核游戏及用户要求的多类型入口；已定沿用、未定才引导；网页复制提示不再强制审核。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:07:34+00:00"
+        },
+        "related": {
+          "result": "pass",
+          "path": "07_示例与交付验收/V0.4通用化验收.md",
+          "note": "同一 AI 推演动作、解谜、经营无结局、混合玩法、已有引擎及浏览器项目等情境；旧项目保护有自动回归。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:07:34+00:00"
+        }
+      },
+      "validation_mode": "scenario_review",
+      "trial_at": "2026-11-18T14:07:34+00:00"
+    },
+    {
+      "id": "I2",
+      "key": "小范围试用交付",
+      "title": "干净试用包、跨类型走查与首次使用验证",
+      "signals": [
+        "V0.4-试用版目标"
+      ],
+      "status": "trial",
+      "previous": "",
+      "classification": "workflow",
+      "cause": "当前通用框架尚缺独立试用交付和首次使用执行证据，预检与初始化存在残留。",
+      "expected": "接收者解压后能开始，初始记录干净，当前包和测试范围可核对；真实体验效果待观察。",
+      "observations": [],
+      "history": [
+        {
+          "op": "assess",
+          "at": "2026-11-18T14:13:11+00:00"
+        },
+        {
+          "op": "prepare",
+          "at": "2026-11-18T14:13:11+00:00"
+        },
+        {
+          "op": "seal",
+          "at": "2026-11-18T14:33:27+00:00"
+        },
+        {
+          "op": "trial",
+          "at": "2026-11-18T14:33:27+00:00"
+        }
+      ],
+      "case_path": "项目记录/工作流改进证据/案例-I2.md",
+      "snapshot": "项目记录/工作流改进证据/变更备份/I2-755bc7c0671743729a5a3e9a82e22c10.json",
+      "files": [
+        "04_本地进度网页/doctor.py",
+        "04_本地进度网页/init_project.py",
+        "04_本地进度网页/tests/check_package.py",
+        "04_本地进度网页/tests/browser.cjs",
+        "04_本地进度网页/tests/test_pilot.py",
+        "04_本地进度网页/build_pilot.py",
+        "04_本地进度网页/tests/pilot_walkthrough.py",
+        "01_客户指南/01_从这里开始.md",
+        "01_客户指南/06_怎样备份恢复和交付.md",
+        "01_客户指南/07_第一次打不开怎么办.md",
+        "01_客户指南/10_小范围试用说明.md",
+        "05_项目模板/使用说明.md",
+        "05_项目模板/首次操作/T00_准备协作.md",
+        "docs/V0.4试用交付说明.md",
+        "docs/CODEX_HANDOFF.md",
+        "04_本地进度网页/web/index.html"
+      ],
+      "sealed": "项目记录/工作流改进证据/变更备份/I2-3ef45fcf339246bd9cabcf75407cdb0f.json",
+      "checks": {
+        "correctness": {
+          "result": "pass",
+          "path": "项目记录/工作流改进证据/验证-I2.md",
+          "note": "最终 ZIP 解压后 73/73 测试、初始化/预检/链接与浏览器通过；保存、端口及 CMD 真实故障已修复复测。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:33:27+00:00"
+        },
+        "necessity": {
+          "result": "pass",
+          "path": "项目记录/工作流改进证据/验证-I2.md",
+          "note": "单独审查仅增加首次使用、可靠保存和干净交付所需内容，未放宽验收，未创建平行游戏进度或在线服务。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:33:27+00:00"
+        },
+        "original": {
+          "result": "pass",
+          "path": "项目记录/工作流改进证据/验证-I2.md",
+          "note": "按小范围试用目标生成 100 文件干净 ZIP、首步卡片和分享说明，实际解压启动；非真人试用结论。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:33:27+00:00"
+        },
+        "related": {
+          "result": "pass",
+          "path": "项目记录/工作流改进证据/验证-I2.md",
+          "note": "动作/解谜/经营三案生成真实工作流记录并执行问答、依赖与运行门槛测试；旧记录保护和缺工具路径保留。",
+          "by": "Codex（同一 AI 分轮自查）",
+          "at": "2026-11-18T14:33:27+00:00"
+        }
+      },
+      "validation_mode": "scenario_review",
+      "trial_at": "2026-11-18T14:33:27+00:00"
+    }
+  ],
+  "reviews": [
+    {
+      "scope": "cycle",
+      "note": "覆盖本轮可见泛化请求、实际文件、原有零反馈及本轮验证；未读取旧聊天。当前 task/cycle 收尾完成，I1 待后续真实使用观察，无有效性结论。",
+      "at": "2026-11-18T14:07:34+00:00",
+      "game_revision": 10
+    },
+    {
+      "scope": "task",
+      "note": "本轮试用包目标收尾：三类合成走查、真实故障修复、最终 ZIP 解压与启动/浏览器检查已覆盖。I1 为历史试用版，I2 为后续试用；真实使用效果均不提前认定。",
+      "at": "2026-11-18T14:33:27+00:00",
+      "game_revision": 10
+    }
+  ],
+  "last_task_revision": 10,
   "cycle": {
-    "at": "2026-11-10T04:34:27+00:00",
-    "game_revision": 0,
-    "signal_count": 0
+    "at": "2026-11-18T14:07:34+00:00",
+    "game_revision": 10,
+    "signal_count": 1
   },
   "policy": {
     "tasks": 5,
     "days": 7
   },
-  "events": []
+  "events": [
+    {
+      "op": "ingest",
+      "at": "2026-11-18T14:02:47+00:00",
+      "revision": 1
+    },
+    {
+      "op": "record",
+      "at": "2026-11-18T14:02:48+00:00",
+      "revision": 2
+    },
+    {
+      "op": "assess",
+      "at": "2026-11-18T14:02:48+00:00",
+      "revision": 3
+    },
+    {
+      "op": "prepare",
+      "at": "2026-11-18T14:02:48+00:00",
+      "revision": 4
+    },
+    {
+      "op": "seal",
+      "at": "2026-11-18T14:07:34+00:00",
+      "revision": 5
+    },
+    {
+      "op": "trial",
+      "at": "2026-11-18T14:07:34+00:00",
+      "revision": 6
+    },
+    {
+      "op": "review",
+      "at": "2026-11-18T14:07:34+00:00",
+      "revision": 7
+    },
+    {
+      "op": "ingest",
+      "at": "2026-11-18T14:13:11+00:00",
+      "revision": 8
+    },
+    {
+      "op": "record",
+      "at": "2026-11-18T14:13:11+00:00",
+      "revision": 9
+    },
+    {
+      "op": "assess",
+      "at": "2026-11-18T14:13:11+00:00",
+      "revision": 10
+    },
+    {
+      "op": "prepare",
+      "at": "2026-11-18T14:13:11+00:00",
+      "revision": 11
+    },
+    {
+      "op": "seal",
+      "at": "2026-11-18T14:33:27+00:00",
+      "revision": 12
+    },
+    {
+      "op": "trial",
+      "at": "2026-11-18T14:33:27+00:00",
+      "revision": 13
+    },
+    {
+      "op": "review",
+      "at": "2026-11-18T14:33:27+00:00",
+      "revision": 14
+    }
+  ]
 }

@@ -1,0 +1,470 @@
+{
+  "schema": 1,
+  "revision": 6,
+  "title": "纸鸟送信",
+  "direction": "横版平台跳跃",
+  "updated": "2026-11-18T14:18:44+00:00",
+  "tasks": [
+    {
+      "id": "T00",
+      "stage": "S0",
+      "title": "打开项目与进度网页",
+      "goal": "确认客户能打开本目录、网页和 AI 对话。",
+      "status": "done",
+      "evidence": [
+        {
+          "kind": "document",
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "仅合成流程证据，非真实客户/游戏验收",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        }
+      ],
+      "reviews": {
+        "correctness": {
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "合成流程自查",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        },
+        "necessity": {
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "合成流程自查",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        }
+      },
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document"
+      ],
+      "depends": [],
+      "history": [],
+      "instructions": "项目记录/当前操作/设计.md"
+    },
+    {
+      "id": "T01",
+      "stage": "S0",
+      "title": "确认合作方式",
+      "goal": "客户知道怎样继续、提问和反馈，不要求学习术语。",
+      "status": "done",
+      "evidence": [
+        {
+          "kind": "document",
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "仅合成流程证据，非真实客户/游戏验收",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        }
+      ],
+      "reviews": {
+        "correctness": {
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "合成流程自查",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        },
+        "necessity": {
+          "result": "pass",
+          "path": "项目记录/走查证据.md",
+          "note": "合成流程自查",
+          "by": "pilot fixture",
+          "at": "2026-11-18T14:18:44+00:00"
+        }
+      },
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document"
+      ],
+      "depends": [],
+      "history": [],
+      "instructions": "项目记录/当前操作/设计.md"
+    },
+    {
+      "id": "T10",
+      "stage": "S1",
+      "title": "确定玩家的动作与体验",
+      "goal": "从一次典型游玩切入，沿用已有类型；未定时收敛目标、动作、反馈与主要乐趣。",
+      "status": "active",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "跌落后，你希望回到本关起点，还是最近的检查点？",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": [],
+      "instructions": "项目记录/当前操作/设计.md"
+    },
+    {
+      "id": "T11",
+      "stage": "S1",
+      "title": "完成首轮参考与设计判断",
+      "goal": "围绕当前疑点查证参考，形成采用、调整或暂缓决定。后续仍按需研究。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T20",
+      "stage": "S2",
+      "title": "确认完整版本范围",
+      "goal": "明确内容单位、机制发展、完整体验标准、产品配套和目标平台；数量与范围由客户确认。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T21",
+      "stage": "S2",
+      "title": "拆分制作与验收任务",
+      "goal": "完整范围每一项都映射到任务、资产和测试。原型不代替最终交付。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T30",
+      "stage": "S3",
+      "title": "准备游戏工程与运行环境",
+      "goal": "根据需求和已有工程确定技术路线及版本，建立可运行的最小场景并记录真实路径。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T31",
+      "stage": "S3",
+      "title": "体验核心玩法循环",
+      "goal": "实现所选玩法的核心动作、规则与反馈；验证正常、失败、重复操作、中断与重试等适用路径。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T40",
+      "stage": "S4",
+      "title": "确定视听与内容制作规范",
+      "goal": "先验收所需的界面、场景、角色、模型/动画、叙事或声音样本及实际接入，再批量制作。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T41",
+      "stage": "S4",
+      "title": "验证代表片段",
+      "goal": "从进入、学习操作、核心游玩到阶段结果与继续，记录客户体验和实测制作成本。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T50",
+      "stage": "S5",
+      "title": "完成全部系统与内容",
+      "goal": "按范围追踪全部机制、关卡/章节/对局等内容单元、视听与正式资产；建立实际制作批次。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T51",
+      "stage": "S5",
+      "title": "完成产品配套功能",
+      "goal": "完成范围内存档恢复、设置、暂停退出、教学、可读性与适用的无障碍支持。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T60",
+      "stage": "S6",
+      "title": "验证完整流程与关键路径",
+      "goal": "用内容矩阵核对约定完成条件、关键路径与适用分支，检查玩法和内容一致性。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T61",
+      "stage": "S6",
+      "title": "修复缺陷与体验问题",
+      "goal": "分级处理阻塞、平衡、节奏、可读性；问题修复后复测相关流程。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "editor",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T70",
+      "stage": "S7",
+      "title": "构建并验证发布候选",
+      "goal": "在约定设备/系统/分辨率矩阵运行，检查性能、输入、存档与升级兼容性。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "build",
+        "player",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T71",
+      "stage": "S7",
+      "title": "完成发布验收",
+      "goal": "未解决问题都有级别和处置决定；阻塞缺陷清零，完整范围逐项验收。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "build",
+        "player",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T80",
+      "stage": "S8",
+      "title": "准备发行材料与交付包",
+      "goal": "检查授权来源、字体音频、第三方声明、说明书、商店素材、版本号和备份。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "player",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T81",
+      "stage": "S8",
+      "title": "完成约定交付或发布",
+      "goal": "渠道、受众与操作授权明确后执行。若只交付安装包，记录未上架，不冒称已发布。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "player",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T90",
+      "stage": "S9",
+      "title": "建立维护与恢复机制",
+      "goal": "明确反馈入口、负责人、支持范围、问题分级、存档备份与回滚方式；无真实事故时标记演练。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    },
+    {
+      "id": "T91",
+      "stage": "S9",
+      "title": "完成维护交接",
+      "goal": "记录实际问题或演练、补丁计划、回归标准与交接。后续版本开新任务，保留历史证据。",
+      "status": "pending",
+      "evidence": [],
+      "reviews": {},
+      "blocker": "",
+      "question": "",
+      "required": [
+        "document",
+        "customer"
+      ],
+      "depends": [],
+      "history": []
+    }
+  ],
+  "feedback": [
+    {
+      "id": "F5",
+      "task": "T10",
+      "scope": "task",
+      "text": "合成回答：回到本关起点，信件也重置。",
+      "kind": "idea",
+      "status": "resolved",
+      "at": "2026-11-18T14:18:44+00:00",
+      "resolution": "脚本化答案已用于设计草案，真实客户尚未参与"
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "project",
+      "task": "",
+      "revision": 1,
+      "reason": "隔离走查的测试输入",
+      "completed": false
+    },
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "update",
+      "task": "T00",
+      "revision": 2,
+      "reason": "",
+      "completed": true
+    },
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "update",
+      "task": "T01",
+      "revision": 3,
+      "reason": "",
+      "completed": true
+    },
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "update",
+      "task": "T10",
+      "revision": 4,
+      "reason": "",
+      "completed": false
+    },
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "feedback",
+      "task": "T10",
+      "revision": 5,
+      "reason": "",
+      "completed": false
+    },
+    {
+      "at": "2026-11-18T14:18:44+00:00",
+      "op": "resolve",
+      "task": "",
+      "revision": 6,
+      "reason": "",
+      "completed": false
+    }
+  ]
+}

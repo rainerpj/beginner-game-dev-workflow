@@ -1,0 +1,19 @@
+{
+  "no_python": {
+    "result": "pass",
+    "exit_code": 1,
+    "output": "没有找到可用的 Python 3.10 或更新版本。\nPress any key to continue . . . \n"
+  },
+  "scope": "isolated PATH/USERPROFILE; not a clean-machine install",
+  "real_launcher": {
+    "result": "pass",
+    "requested_browser_url": "http://127.0.0.1:8765",
+    "revision": 0,
+    "scope": "real CMD + Python + HTTP; browser-open captured by local test hook"
+  },
+  "occupied_port": {
+    "result": "pass",
+    "exit_code": 1,
+    "output": "Press any key to continue . . . \n端口无法使用。若已有本项目窗口，请使用它；或运行 server.py --port 8766 --open。\n"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "no_python": {
+    "result": "pass",
+    "exit_code": 1,
+    "output": "没有找到可用的 Python 3.10 或更新版本。\n\n请先用 Codex 打开本文件夹，说：\n“请检查这个工作流的 Python 环境，帮助我启动进度网页。”\n\n现在仍可先和 Codex 整理游戏想法，不需要先安装游戏引擎。\n详细说明：README.md 或 01_客户指南/07_第一次打不开怎么办.md。\n如果暂时没有可用的 Codex，请把这个提示交给向你提供试用包的人。\n\nPress any key to continue . . . \n",
+    "stderr": ""
+  },
+  "scope": "isolated PATH/USERPROFILE; not a clean-machine install",
+  "real_launcher": {
+    "result": "pass",
+    "requested_browser_url": "http://127.0.0.1:8765",
+    "revision": 0,
+    "scope": "real CMD + Python + HTTP; browser-open captured by local test hook"
+  },
+  "occupied_port": {
+    "result": "pass",
+    "exit_code": 1,
+    "output": "Press any key to continue . . . \n端口无法使用。若已有本项目窗口，请使用它；或运行 server.py --port 8766 --open。\n"
+  }
+}

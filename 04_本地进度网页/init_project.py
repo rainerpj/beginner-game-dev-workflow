@@ -16,6 +16,13 @@ def main():
             shutil.copyfile(source, target / source.name)
             if not (target / source.name).is_file():
                 raise SystemExit('模板复制失败：' + source.name)
+    card = target / '当前操作' / 'T00_准备协作.md'
+    card.parent.mkdir(exist_ok=True)
+    shutil.copyfile(workflow.ROOT / '05_项目模板/首次操作/T00_准备协作.md', card)
+    if not card.is_file():
+        raise SystemExit('首次操作卡复制失败。')
+    initial['tasks'][0]['instructions'] = card.relative_to(workflow.ROOT).as_posix()
+    workflow.validate(initial, workflow.ROOT)
     workflow.atomic(target / 'state.json', initial)
     workflow.atomic(target / improvement.NAME, improvement.seed())
     print('项目记录已初始化；所有任务均未验收。')

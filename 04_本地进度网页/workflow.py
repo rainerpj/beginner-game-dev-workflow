@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import time
 from datetime import datetime, timezone
 from contextlib import contextmanager
 
@@ -36,8 +37,8 @@ def seed():
             tasks.append(dict(id=tid, stage=stage['id'], title=title, goal=goal,
                               status='pending', evidence=[], reviews={}, blocker='', question='',
                               required=stage['checks'], depends=[], history=[]))
-    return dict(schema=1, revision=0, title='我的证件审核游戏',
-                direction='《Papers, Please》式审核与判断游戏；完整游戏全生命周期',
+    return dict(schema=1, revision=0, title='我的游戏',
+                direction='从已有资料确定游戏方向；完整游戏全生命周期',
                 updated=now(), tasks=tasks, feedback=[], events=[])
 
 
@@ -229,7 +230,16 @@ def atomic(path, state):
             stream.write('\n')
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temp, path)
+        for attempt in range(5):
+            try:
+                os.replace(temp, path)
+                break
+            except PermissionError as exc:
+                # Windows readers/scanners may briefly deny rename/delete sharing.
+                # Keep the existing file intact and fail after at most 0.5 s.
+                if getattr(exc, 'winerror', None) not in (5, 32, 33) or attempt == 4:
+                    raise
+                time.sleep(0.05 * (attempt + 1))
     finally:
         Path(temp).unlink(missing_ok=True)
 
@@ -262,7 +272,18 @@ def apply(payload, path=STATE, root=ROOT):
         task = tasks.get(payload.get('task'))
         if (op in ('update', 'reopen') or (op == 'feedback' and payload.get('scope', 'task') != 'workflow')) and task is None:
             raise Invalid('找不到这项任务。')
-        if op == 'update':
+        if op == 'project':
+            # Display metadata only. Gameplay changes still use update/reopen.
+            if set(payload) - {'revision', 'op', 'title', 'direction', 'reason'}:
+                raise Invalid('project 只更新项目展示名称与方向；玩法变更请更新需求并重开受影响任务。')
+            nonempty(payload.get('reason'), '项目说明变更原因')
+            if not any(k in payload for k in ('title', 'direction')):
+                raise Invalid('请提供项目名称或方向。')
+            for field, limit in (('title', 150), ('direction', 2000)):
+                if field in payload:
+                    nonempty(payload[field], field, limit)
+                    state[field] = payload[field]
+        elif op == 'update':
             if task['status'] == 'done':
                 raise Invalid('已验收任务需先 reopen，再修改并重新验证。')
             if any(k in payload and payload[k] != task.get(k) for k in ('title', 'goal', 'depends', 'instructions')) and (task['evidence'] or task['reviews']):

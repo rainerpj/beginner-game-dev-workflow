@@ -1,6 +1,8 @@
 import argparse
 import json
 import mimetypes
+import os
+import socket
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -13,9 +15,23 @@ ROOT = workflow.ROOT
 WEB = Path(__file__).parent / 'web'
 
 
+class LocalHTTPServer(ThreadingHTTPServer):
+    # SO_REUSEADDR on Windows can let a second workspace steal the same endpoint.
+    allow_reuse_address = os.name != 'nt'
+
+    def server_bind(self):
+        if os.name == 'nt':
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
 def documents():
     roots = ['01_客户指南', '02_工作流规范', '03_Skills', '05_项目模板', '06_推进提示词库', '07_示例与交付验收', '项目记录', 'docs']
-    return sorted([p.relative_to(ROOT).as_posix() for name in roots for p in (ROOT / name).rglob('*.md')])
+    private = {'backups', '变更备份', '临时测试', '__pycache__'}
+    return sorted(p.relative_to(ROOT).as_posix() for name in roots
+                  for p in (ROOT / name).rglob('*.md')
+                  if not any(part in private or part.startswith('.') for part in p.relative_to(ROOT).parts)
+                  and p.resolve().is_relative_to(ROOT.resolve()))
 
 
 def evidence_files():
@@ -134,7 +150,7 @@ def main():
     parser.add_argument('--open', action='store_true')
     args = parser.parse_args()
     try:
-        server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
+        server = LocalHTTPServer(('127.0.0.1', args.port), Handler)
     except OSError:
         parser.exit(1, '端口无法使用。若已有本项目窗口，请使用它；或运行 server.py --port 8766 --open。\n')
     url = f'http://127.0.0.1:{server.server_port}'

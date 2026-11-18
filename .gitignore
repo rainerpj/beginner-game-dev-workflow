@@ -9,6 +9,8 @@ Game/Temp/
 Game/Logs/
 Game/Obj/
 Game/UserSettings/
-交付包/
+交付包/*
+!交付包/游戏开发工作流_V0.4-pilot.1.zip
+07_示例与交付验收/**/backups/
 
 项目记录/工作流改进证据/变更备份/

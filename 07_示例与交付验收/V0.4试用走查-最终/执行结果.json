@@ -1,0 +1,32 @@
+[
+  {
+    "case": "动作",
+    "project": "纸鸟送信",
+    "revision": 14,
+    "question_gate": "pass",
+    "feedback_answer": "pass",
+    "runtime_gate": "pass",
+    "batch_dependency": "pass",
+    "limitation": "synthetic walkthrough only; no real customer or engine"
+  },
+  {
+    "case": "解谜",
+    "project": "灯塔电路",
+    "revision": 14,
+    "question_gate": "pass",
+    "feedback_answer": "pass",
+    "runtime_gate": "pass",
+    "batch_dependency": "pass",
+    "limitation": "synthetic walkthrough only; no real customer or engine"
+  },
+  {
+    "case": "经营",
+    "project": "小小茶铺",
+    "revision": 14,
+    "question_gate": "pass",
+    "feedback_answer": "pass",
+    "runtime_gate": "pass",
+    "batch_dependency": "pass",
+    "limitation": "synthetic walkthrough only; no real customer or engine"
+  }
+]
